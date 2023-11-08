@@ -1,0 +1,10 @@
+{
+  "RabbitMQSettings": 
+    {
+      "Host": "172.16.10.10",
+      "UserName": "admin",
+      "Password": "Oky789456",
+      "Port": 5677
+    }
+  
+}
