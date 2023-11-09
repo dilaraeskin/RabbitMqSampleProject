@@ -5,7 +5,7 @@ namespace DataContract
     public class Source
     {
         [Key]
-        public int SourceId { get; set; }
+        public int SourceId { get; set; } 
         public string Name { get; set; }
     }
 }

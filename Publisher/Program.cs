@@ -23,7 +23,6 @@ namespace PublisherApp
 
             host.Run();
 
-
             static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
             {
                 services.AddRabbitMQServices(context.Configuration);

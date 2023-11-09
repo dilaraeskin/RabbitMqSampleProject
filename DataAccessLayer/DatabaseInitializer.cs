@@ -10,7 +10,7 @@ namespace DataAccessLayer
         public static void CreateDbIfNotExists(IHost host, Type contextType)
         {
             using (var scope = host.Services.CreateScope())
-            {
+            { 
                 var services = scope.ServiceProvider;
                 try
                 {

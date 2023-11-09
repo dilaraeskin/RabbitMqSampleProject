@@ -46,7 +46,6 @@ namespace ConsumerApp
                 await Task.Delay(1000);
             }
         }
-
         public Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("ConsumerApp stopping at: {time}", DateTimeOffset.Now);

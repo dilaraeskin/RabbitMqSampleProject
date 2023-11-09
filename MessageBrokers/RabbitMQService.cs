@@ -19,7 +19,6 @@ namespace MessageBrokers
             _rabbitMQSettings = options.Value;
             _logger = logger;
         }
-
         private IConnection CreateConnection()
         {
             var factory = new ConnectionFactory
@@ -95,6 +94,5 @@ namespace MessageBrokers
 
             };
         }
-
     }
 }

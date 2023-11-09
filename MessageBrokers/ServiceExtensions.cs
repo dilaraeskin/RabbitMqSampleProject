@@ -8,7 +8,7 @@ namespace MessageBrokers
         public static void AddRabbitMQServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<RabbitMQSettings>(configuration.GetSection(nameof(RabbitMQSettings)));
-            services.AddSingleton<RabbitMQService>();
+            services.AddSingleton<RabbitMQService>(); 
         }
     }
 }

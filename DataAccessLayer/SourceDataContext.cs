@@ -13,7 +13,6 @@ namespace DataAccessLayer
             _configuration = configuration;
             Database.EnsureCreated();
         }
-
         public DbSet<Source> Sources { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

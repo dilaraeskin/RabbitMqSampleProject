@@ -35,7 +35,6 @@ namespace PublisherApp
             }
             _lastSourceTableState = currentSourceTableState;
         }
-
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             // queue yarat
@@ -52,7 +51,6 @@ namespace PublisherApp
                 await Task.Delay(1000);
             }
         }
-
         public Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Publisher stopping at: {time}", DateTimeOffset.Now);
