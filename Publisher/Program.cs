@@ -18,7 +18,7 @@ namespace PublisherApp
                           })
                           .ConfigureServices(ConfigureServices)
                           .Build();
-
+             
             DatabaseInitializer.CreateDbIfNotExists(host, typeof(SourceDataContext));
 
             host.Run();
