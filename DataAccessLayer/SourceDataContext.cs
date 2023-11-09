@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataContract;
 using Microsoft.EntityFrameworkCore;
-using DataContract;
 using Microsoft.Extensions.Configuration;
 
 namespace DataAccessLayer
@@ -17,7 +11,6 @@ namespace DataAccessLayer
         public SourceDataContext(DbContextOptions<SourceDataContext> options, IConfiguration configuration) : base(options)
         {
             _configuration = configuration;
-            var asd = _configuration.GetConnectionString("SourceConnectionString");
             Database.EnsureCreated();
         }
 

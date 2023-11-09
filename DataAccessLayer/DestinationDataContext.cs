@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataContract;
 using Microsoft.EntityFrameworkCore;
-using DataContract;
 using Microsoft.Extensions.Configuration;
 
 namespace DataAccessLayer

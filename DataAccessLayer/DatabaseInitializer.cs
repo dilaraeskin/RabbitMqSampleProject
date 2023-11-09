@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -6,17 +7,15 @@ namespace DataAccessLayer
 {
     public class DatabaseInitializer
     {
-        public static void CreateDbIfNotExists(IHost host)
+        public static void CreateDbIfNotExists(IHost host, Type contextType)
         {
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var sourceDataContext = services.GetRequiredService<SourceDataContext>();
-                    var destinationDataContext = services.GetRequiredService<DestinationDataContext>();
-                    sourceDataContext.Database.EnsureCreated();
-                    destinationDataContext.Database.EnsureCreated();
+                    var context = services.GetRequiredService(contextType) as DbContext;
+                    context.Database.EnsureCreated();
                 }
                 catch (Exception ex)
                 {

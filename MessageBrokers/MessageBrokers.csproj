@@ -22,10 +22,4 @@
     <ProjectReference Include="..\DataContract\DataContract.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="rabbitMQSettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
