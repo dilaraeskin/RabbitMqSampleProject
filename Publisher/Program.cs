@@ -17,7 +17,7 @@ namespace PublisherApp
                               builder.AddJsonFile(Path.Combine(AppContext.BaseDirectory, "appsettings.json"), false);
                           })
                           .ConfigureServices(ConfigureServices)
-                          .Build();
+                          .Build(); 
              
             DatabaseInitializer.CreateDbIfNotExists(host, typeof(SourceDataContext));
 
