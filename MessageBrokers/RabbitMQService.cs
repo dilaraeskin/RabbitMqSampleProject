@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
+using System.Threading.Channels;
 
 namespace MessageBrokers
 {
@@ -76,50 +77,26 @@ namespace MessageBrokers
             _channel.BasicPublish(exchange, routingKey, props, body);
 
         }
-        public void ConsumeData<T>(DestinationDataContext _destinationDataContext, string exchange, string routingKey)
+        public void RegisterConsumer<TMessage>(string routingKey, string exchange,
+                                           Action<TMessage> consumerCallback) where TMessage : class
         {
-            var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += async (model, ea) =>
+            var ebc = new EventingBasicConsumer(_channel);
+            var consumerTag = _channel.BasicConsume(queue: routingKey, autoAck: true, consumer: ebc);
+            ebc.Received += (model, ea) =>
             {
-                var body = ea.Body.ToArray();
-                var message = Encoding.UTF8.GetString(body);
                 try
                 {
-                    if (!string.IsNullOrEmpty(message))
-                    {
-                        Console.WriteLine("Gelen Mesaj: {0}", message);
-                        var entity = JsonConvert.DeserializeObject<T>(message, new JsonSerializerSettings
-                        {
-                            TypeNameHandling = TypeNameHandling.Auto
-                        });
-
-                        if (entity != null)
-                        {
-                            try
-                            {
-                                _destinationDataContext.Add(entity);
-                                _destinationDataContext.SaveChanges();
-                            }
-                            catch (Exception ex)
-                            {
-                                _logger.LogInformation("Datas not added to DataContext: {time}", DateTimeOffset.Now);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        _logger.LogInformation("ConsumeData empty messages: {time}", DateTimeOffset.Now);
-                    }
+                    var message = ea.Body.ToArray();
+                    var body = JsonConvert.DeserializeObject<TMessage>(Encoding.UTF8.GetString(message));
+                    consumerCallback.Invoke(body);
                 }
-                catch (JsonReaderException ex)
+                catch (Exception ex)
                 {
-                    _logger.LogInformation("ConsumeData running at: {time}", DateTimeOffset.Now);
+                    _logger.LogError(ex.ToString());
                 }
-            };
-            _channel.BasicConsume(queue: routingKey,
-                                 autoAck: true,
-                                 consumer: consumer);
 
+            };
         }
+
     }
 }

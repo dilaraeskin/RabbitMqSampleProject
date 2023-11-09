@@ -34,7 +34,6 @@ namespace PublisherApp
                 _rabbitMQService.Send(difference, "", _queueName);
             }
             _lastSourceTableState = currentSourceTableState;
-
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)

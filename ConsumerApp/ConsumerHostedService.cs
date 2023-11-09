@@ -19,11 +19,22 @@ namespace ConsumerApp
             _logger = logger;
             _destinationDataContext = destinationDataContext;
         }
-        public async Task ConsumeDataToTargetTable()
+        public void ConsumeDataToTargetTable()
         {
-            _rabbitMQService.ConsumeData<Target>(_destinationDataContext, "", _queueName);
+            _rabbitMQService.RegisterConsumer<Target>(_queueName, "", (message) => ConsumeQueueMessage(message));
         }
-
+        private void ConsumeQueueMessage(Target message)
+        {
+            try
+            {
+                _destinationDataContext.Add(message);
+                _destinationDataContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Data cannot added : {time}", DateTimeOffset.Now);
+            }
+        }
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             _rabbitMQService.DeclareQueue(_queueName);
