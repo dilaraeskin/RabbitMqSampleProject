@@ -21,8 +21,6 @@ namespace PublisherApp
             _logger = logger;
             _sourceDataContext = sourceDataContext;
         }
-
-        //public async Task PublishDataFromSourceTable<T>() where T : class
         public async Task PublishDataFromSourceTable() 
         {
             var sourceTable = _sourceDataContext.Set<Source>();

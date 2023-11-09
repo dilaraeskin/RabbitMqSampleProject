@@ -19,7 +19,6 @@ namespace ConsumerApp
             _logger = logger;
             _destinationDataContext = destinationDataContext;
         }
-        //public void ConsumeDataToTargetTable<T>() where T : class
         public async Task ConsumeDataToTargetTable()
         {
             _rabbitMQService.ConsumeData<Target>(_destinationDataContext, "", _queueName);
