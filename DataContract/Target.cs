@@ -1,8 +1,11 @@
-﻿namespace DataContract
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DataContract
 {
     public class Target
     {
-        public int SourceId { get; set; }
+        [Key]
+        public int TargetId { get; set; }
         public string Name { get; set; }
     }
 }

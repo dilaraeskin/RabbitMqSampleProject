@@ -1,4 +1,6 @@
-﻿namespace MessageBrokers
+﻿using Newtonsoft.Json;
+
+namespace MessageBrokers
 {
     public class RabbitMQSettings
     {
@@ -6,5 +8,6 @@
         public string UserName { get; set; }
         public string Password { get; set; }
         public int Port { get; set; }
+        public int FetchCount { get; set; }
     }
 }
