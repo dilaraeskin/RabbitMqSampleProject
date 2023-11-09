@@ -13,7 +13,6 @@ namespace MessageBrokers
         private IConnection _connection;
         private IModel _channel;
         private readonly ILogger<RabbitMQService> _logger;
-
         private readonly RabbitMQSettings _rabbitMQSettings;
 
         public RabbitMQService(IOptions<RabbitMQSettings> options, ILogger<RabbitMQService> logger)
@@ -122,6 +121,5 @@ namespace MessageBrokers
                                  consumer: consumer);
 
         }
-
     }
 }
